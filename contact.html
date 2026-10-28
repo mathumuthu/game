@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"> 
     <style>
         :root {
-            --primary: #1e4ec7;
+            --primary: red;
             --primary-dark: black;
             --dark: #2f1014;
             --darker: #100b0b;
@@ -343,22 +343,22 @@ body{
             <div class="contact-info-card fade-in scale-in">
                 <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
                 <h3>Visit Us</h3>
-                <p>123 Padel Street</p>
-                <p>Sports City, SC 12345</p>
+                <p>123 Chinna Tirupathi </p>
+                <p>Salem , Tamil Nadu</p>
                 <a href="404.html">Get Directions</a>
             </div>
             <div class="contact-info-card fade-in scale-in">
                 <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
                 <h3>Call Us</h3>
-                <p>+1 (555) 123-4567</p>
+                <p>9876543210</p>
                 <p>Mon-Sun: 6AM - 11PM</p>
                 <a href="404.html">Call Now</a>
             </div>
             <div class="contact-info-card fade-in scale-in">
                 <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
                 <h3>Email Us</h3>
-                <p>info@padeltaz.com</p>
-                <p>support@padeltaz.com</p>
+                <p>info@stackly.com</p>
+                <p>support@stack.com</p>
                 <a href="404.html">Send Email</a>
             </div>
             <div class="contact-info-card fade-in scale-in">
@@ -380,8 +380,7 @@ body{
             <div class="contact-form-right fade-in-right">
                 <h2>Send Us a <span>Message</span></h2>
                 <!-- <p>Fill out the form below and our team will get back to you within 24 hours. Whether you're interested in membership, court booking, or coaching — we're here to help.</p> -->
-                <form onsubmit="event.preventDefault(); alert('Thank you for your message! We will get back to you soon.');">
-                    <div class="form-row">
+<form id="contactForm">                    <div class="form-row">
                         <div class="form-group">
                             <label>First Name</label>
 <input
@@ -585,16 +584,16 @@ oninput="this.value=this.value.replace(/[^0-9]/g,'')">                          
             </div>
             <div class="footer-col">
                 <h4>Contact</h4>
-                <ul>
+                  <ul>
                     <li><a href="404.html"><i class="fas fa-map-marker-alt"></i> Chinna Tirupathi Salem</a></li>
-                    <li><a href="404.html"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
+                    <li><a href="404.html"><i class="fas fa-phone"></i> 987654321</a></li>
                     <li><a href="404.html"><i class="fas fa-envelope"></i> info@stack.com</a></li>
                     <li><a href="404.html"><i class="fas fa-clock"></i> Mon-Sun: 6AM - 11PM</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Padeltaz. All rights reserved.</p>
+            <p>&copy; 2026 stackly. All rights reserved.</p>
             <!-- <div class="footer-logo-center">
                 <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=100&h=100&fit=crop" alt="Logo">
                 <span>PADEL<span style="color: var(--primary);">TAZ</span></span>
@@ -643,6 +642,16 @@ oninput="this.value=this.value.replace(/[^0-9]/g,'')">                          
             document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
             if (!wasActive) item.classList.add('active');
         }
+        
+document.getElementById("contactForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    alert("Thank you for your message!");
+
+    // Refresh the page after the success message is closed
+    window.location.reload();
+});
+
     </script>
 </body>
 </html>

@@ -127,51 +127,100 @@ Already have an account?
 </div>
 
 <script>
+const nameInput = document.getElementById("name");
+const mobileInput = document.getElementById("mobile");
+const passwordInput = document.getElementById("password");
+const confirmInput = document.getElementById("confirm");
+const eye1 = document.getElementById("eye1");
+const eye2 = document.getElementById("eye2");
+const signupForm = document.getElementById("signupForm");
 
-// Name letters only
-document.getElementById("name").addEventListener("input",function(){
-this.value=this.value.replace(/[^a-zA-Z ]/g,"");
+// Name - letters and spaces only
+nameInput.addEventListener("input", function () {
+    this.value = this.value.replace(/[^a-zA-Z ]/g, "");
 });
 
-// Mobile numbers only
-document.getElementById("mobile").addEventListener("input",function(){
-this.value=this.value.replace(/\D/g,"").slice(0,10);
+// Mobile - numbers only, maximum 10 digits
+mobileInput.addEventListener("input", function () {
+    this.value = this.value.replace(/\D/g, "").slice(0, 10);
 });
 
-// Show Password
-eye1.onclick=function(){
-password.type=password.type==="password"?"text":"password";
-}
+// Show / Hide Password
+eye1.addEventListener("click", function () {
+    passwordInput.type =
+        passwordInput.type === "password" ? "text" : "password";
 
-eye2.onclick=function(){
-confirm.type=confirm.type==="password"?"text":"password";
-}
+    this.classList.toggle("bi-eye");
+    this.classList.toggle("bi-eye-slash");
+});
 
-document.getElementById("signupForm").addEventListener("submit",function(e){
+// Show / Hide Confirm Password
+eye2.addEventListener("click", function () {
+    confirmInput.type =
+        confirmInput.type === "password" ? "text" : "password";
 
-e.preventDefault();
+    this.classList.toggle("bi-eye");
+    this.classList.toggle("bi-eye-slash");
+});
 
-let password=document.getElementById("password").value;
-let confirm=document.getElementById("confirm").value;
+// Confirm Password validation
+confirmInput.addEventListener("input", function () {
+    if (this.value !== passwordInput.value) {
+        this.setCustomValidity("Passwords do not match.");
+    } else {
+        this.setCustomValidity("");
+    }
+});
 
-let pattern=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+// Clear mismatch when original password changes
+passwordInput.addEventListener("input", function () {
+    if (confirmInput.value !== "") {
+        confirmInput.setCustomValidity(
+            confirmInput.value !== this.value
+                ? "Passwords do not match."
+                : ""
+        );
+    }
+});
 
-if(!pattern.test(password)){
-alert("Password must contain 8 characters, Uppercase, Lowercase, Number & Special Character.");
-return;
-}
+// Form submission
+signupForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-if(password!==confirm){
-alert("Passwords do not match.");
-return;
-}
+    const password = passwordInput.value;
+    const confirm = confirmInput.value;
 
-alert("Account Created Successfully");
+    // Check mobile number
+    if (!/^\d{10}$/.test(mobileInput.value)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        mobileInput.focus();
+        return;
+    }
 
-window.location="login.html";
+    // Password requirements
+    const pattern =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
+    if (!pattern.test(password)) {
+        alert(
+            "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+        );
+        passwordInput.focus();
+        return;
+    }
+
+    // Confirm password check
+    if (password !== confirm) {
+        alert("Passwords do not match. Please enter the same password.");
+        confirmInput.focus();
+        return;
+    }
+
+    alert("Account Created Successfully!");
+    window.location.href = "login.html";
 });
 </script>
+
 
 </body>
 </html>
