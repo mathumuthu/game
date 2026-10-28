@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Padeltaz Padel Club & Sports Academy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">    <style>
+        :root {
+            --primary: #133893;
+            --primary-dark:black;
+            --dark: #2f1014;
+            --darker: #100b0b;
+            --card: #111111;
+            --card-hover: #1a1a1a;
+            --text: #f5f5f5;
+            --text-muted: #888888;
+            --border: #222222;
+            --border-light: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        html,
+body{
+    width:100%;
+    overflow-x:hidden;
+    -webkit-text-size-adjust:100%;
+}
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========== HEADER ========== */
+        .header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    padding:0 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+}
+        .header.scrolled {
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 40px;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+        }
+        .logo {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none;
+        }
+        .logo-img {
+            width: 50px; height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 28px; font-weight: 700;
+            color: var(--text); letter-spacing: 2px;
+        }
+        .logo-text span { color: var(--primary); }
+
+        .nav {
+            display: flex; gap: 35px; align-items: center;
+        }
+        .nav a {
+            color: var(--text); text-decoration: none;
+            font-size: 14px; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: color 0.3s; position: relative;
+        }
+        .nav a::after {
+            content: ''; position: absolute;
+            bottom: -5px; left: 0; width: 0; height: 2px;
+            background: var(--primary); transition: width 0.3s;
+        }
+        .nav a:hover { color: var(--primary); }
+        .nav a:hover::after { width: 100%; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 32px; background: var(--primary);
+            color: var(--dark); text-decoration: none;
+            font-weight: 700; font-size: 14px;
+            text-transform: uppercase; letter-spacing: 1px;
+            border: none; cursor: pointer;
+            transition: all 0.3s ease; border-radius: 4px;
+            font-family: 'Oswald', sans-serif;
+        }
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(163,230,53,0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary); color: var(--dark);
+        }
+        .btn-white {
+            background: var(--text); color: var(--dark);
+        }
+        .btn-white:hover { background: var(--primary); }
+
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; z-index: 1001;
+        }
+     .hamburger{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    flex-shrink:0;
+}
+        .hamburger span {
+            width: 30px; height: 3px;
+            background: var(--text); transition: all 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+
+        .menu-overlay {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 999;
+            opacity: 0; visibility: hidden; transition: all 0.3s;
+        }
+        .menu-overlay.active { opacity: 1; visibility: visible; }
+
+        /* ========== PAGE HERO ========== */
+        .page-hero {
+            min-height: 50vh;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+            padding: 140px 40px 80px;
+            text-align: center;
+        }
+        .page-hero-bg {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; z-index: 0;
+        }
+        .page-hero-bg::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.85) 100%);
+            z-index: 1;
+        }
+        .page-hero-bg img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: brightness(0.3);
+        }
+        .page-hero-content {
+            position: relative; z-index: 2;
+        }
+        .page-hero .tag {
+            color: var(--primary); font-size: 14px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 3px;
+            margin-bottom: 20px; display: block;
+        }
+        .page-hero h1 {
+            font-size: clamp(36px, 6vw, 64px); font-weight: 700;
+            margin-bottom: 20px; line-height: 1.1;
+        }
+        .page-hero h1 span { color: var(--primary); }
+        .page-hero p {
+            color: var(--text-muted); font-size: 18px;
+            max-width: 600px; margin: 0 auto; line-height: 1.7;
+        }
+        .breadcrumb {
+            display: flex; gap: 15px; justify-content: center;
+            margin-top: 25px; font-size: 14px;
+        }
+        .breadcrumb a {
+            color: var(--text-muted); text-decoration: none;
+            transition: color 0.3s;
+        }
+        .breadcrumb a:hover { color: var(--primary); }
+        .breadcrumb span { color: var(--primary); }
+        .breadcrumb i { color: var(--text-muted); font-size: 10px; margin-top: 4px; }
+
+        /* ========== ABOUT STORY ========== */
+        .about-story {
+            padding: 100px 40px; background: var(--darker);
+        }
+        .about-story-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 80px; max-width: 1300px; margin: 0 auto;
+            align-items: center;
+        }
+        .about-story-img {
+            position: relative;
+        }
+        .about-story-img img {
+            width: 100%; border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease;
+        }
+        .about-story-img:hover img { transform: scale(1.02); }
+        .about-story-img::before {
+            content: ''; position: absolute;
+            top: -20px; left: -20px; width: 100%; height: 100%;
+            border: 2px solid var(--primary); border-radius: 16px;
+            z-index: -1; transition: all 0.4s ease;
+        }
+        .about-story-img:hover::before {
+            top: -10px; left: -10px;
+        }
+        .experience-badge {
+            position: absolute; bottom: 30px; right: -20px;
+            background: var(--primary); color: var(--dark);
+            padding: 20px 30px; border-radius: 12px;
+            text-align: center; box-shadow: 0 10px 30px rgba(163,230,53,0.3);
+            animation: pulse-badge 2s infinite;
+        }
+        @keyframes pulse-badge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .experience-badge h3 {
+            font-size: 36px; font-weight: 700; line-height: 1;
+        }
+        .experience-badge p {
+            font-size: 12px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 2px;
+            margin-top: 5px;
+        }
+        .about-story-content h2 {
+            font-size: clamp(28px, 4vw, 42px); margin-bottom: 25px;
+        }
+        .about-story-content h2 span { color: var(--primary); }
+        .about-story-content p {
+            color: var(--text-muted); line-height: 1.8;
+            margin-bottom: 20px; font-size: 16px;
+        }
+        .about-story-features {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 25px; margin-top: 35px;
+        }
+        .story-feature {
+            display: flex; align-items: flex-start; gap: 15px;
+            padding: 20px; background: var(--card);
+            border-radius: 12px; border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .story-feature:hover {
+            border-color: var(--primary);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(163,230,53,0.1);
+        }
+        .story-feature i {
+            width: 45px; height: 45px; min-width: 45px;
+            background: rgba(163,230,53,0.1); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        .story-feature:hover i {
+            background: var(--primary); color: var(--dark);
+            transform: rotateY(360deg);
+        }
+        .story-feature h4 {
+            font-size: 16px; margin-bottom: 5px;
+        }
+        .story-feature p {
+            font-size: 13px; color: var(--text-muted); margin: 0;
+        }
+
+        /* ========== MISSION VISION ========== */
+        .mission-vision {
+            padding: 100px 40px; background: var(--dark);
+            position: relative; overflow: hidden;
+        }
+        .mission-vision::before {
+            content: ''; position: absolute;
+            top: -50%; right: -20%; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(163,230,53,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .mission-vision-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 40px; max-width: 1300px; margin: 0 auto;
+            position: relative; z-index: 1;
+        }
+        .mv-card {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 20px; padding: 50px;
+            transition: all 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .mv-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 4px; background: var(--primary);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .mv-card:hover::before { transform: scaleX(1); }
+        .mv-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(163,230,53,0.1);
+        }
+        .mv-icon {
+            width: 70px; height: 70px; border-radius: 50%;
+            background: rgba(163,230,53,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; color: var(--primary); margin-bottom: 25px;
+            transition: all 0.4s ease;
+        }
+        .mv-card:hover .mv-icon {
+            background: var(--primary); color: var(--dark);
+            transform: rotate(360deg) scale(1.1);
+        }
+        .mv-card h3 {
+            font-size: 24px; margin-bottom: 15px;
+        }
+        .mv-card p {
+            color: var(--text-muted); line-height: 1.8; font-size: 15px;
+        }
+
+        /* ========== STATS COUNTER ========== */
+        .stats-counter {
+            padding: 80px 40px; background: var(--darker);
+            position: relative;
+        }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 30px; max-width: 1200px; margin: 0 auto;
+        }
+        .stat-box {
+            text-align: center; padding: 40px 20px;
+            background: var(--card); border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .stat-box::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 3px; background: var(--primary);
+            transform: scaleX(0); transition: transform 0.4s ease;
+        }
+        .stat-box:hover::after { transform: scaleX(1); }
+        .stat-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(163,230,53,0.1);
+        }
+        .stat-box i {
+            font-size: 36px; color: var(--primary); margin-bottom: 15px;
+            display: block;
+        }
+        .stat-box h3 {
+            font-size: 42px; color: var(--primary); font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .stat-box p {
+            font-size: 13px; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        /* ========== TIMELINE ========== */
+        .timeline {
+            padding: 100px 40px; background: var(--dark);
+        }
+        .section-header {
+            text-align: center; margin-bottom: 80px;
+        }
+        .section-header .tag {
+            color: var(--primary); font-size: 14px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 3px;
+            margin-bottom: 15px; display: block;
+        }
+        .section-header h2 {
+            font-size: clamp(32px, 5vw, 52px); font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .section-header p {
+            color: var(--text-muted); font-size: 16px;
+            max-width: 600px; margin: 0 auto; line-height: 1.7;
+        }
+        .timeline-container {
+            max-width: 1000px; margin: 0 auto;
+            position: relative;
+        }
+        .timeline-container::before {
+            content: ''; position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 3px; height: 100%; background: var(--border);
+        }
+        .timeline-item {
+            display: flex; justify-content: flex-end;
+            padding-right: 50%; position: relative;
+            margin-bottom: 60px;
+        }
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start; padding-right: 0; padding-left: 50%;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 20px; border-radius: 50%;
+            background: var(--primary); border: 4px solid var(--dark);
+            z-index: 2; box-shadow: 0 0 0 4px rgba(163,230,53,0.2);
+            transition: all 0.3s ease;
+        }
+        .timeline-item:hover .timeline-dot {
+            box-shadow: 0 0 0 8px rgba(163,230,53,0.3);
+            transform: translateX(-50%) scale(1.2);
+        }
+        .timeline-content {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 30px; max-width: 420px;
+            transition: all 0.4s ease; position: relative;
+        }
+        .timeline-item:nth-child(even) .timeline-content { margin-left: 40px; }
+        .timeline-item:nth-child(odd) .timeline-content { margin-right: 40px; }
+        .timeline-content:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(163,230,53,0.1);
+        }
+        .timeline-content .year {
+            color: var(--primary); font-size: 14px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+        }
+        .timeline-content h3 {
+            font-size: 20px; margin-bottom: 10px;
+        }
+        .timeline-content p {
+            color: var(--text-muted); font-size: 14px; line-height: 1.7;
+        }
+
+        /* ========== GALLERY ========== */
+        .gallery {
+            padding: 100px 40px; background: var(--darker);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px; max-width: 1300px; margin: 0 auto;
+        }
+        .gallery-item {
+            position: relative; border-radius: 12px; overflow: hidden;
+            cursor: pointer; aspect-ratio: 1;
+        }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease, filter 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.15);
+            filter: brightness(0.5);
+        }
+        .gallery-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay i {
+            font-size: 30px; color: var(--primary);
+            transform: scale(0); transition: transform 0.3s ease 0.1s;
+        }
+        .gallery-item:hover .gallery-overlay i { transform: scale(1); }
+        .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .gallery-item:nth-child(4) { grid-column: span 2; }
+
+        /* ========== PARTNERS ========== */
+        .partners {
+            padding: 80px 40px; background: var(--dark);
+        }
+        .partners-grid {
+            display: grid; grid-template-columns: repeat(6, 1fr);
+            gap: 30px; max-width: 1100px; margin: 0 auto;
+            align-items: center;
+        }
+        .partner-item {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 30px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.4s ease; height: 100px;
+        }
+        .partner-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(163,230,53,0.1);
+        }
+        .partner-item i {
+            font-size: 36px; color: var(--text-muted);
+            transition: color 0.3s;
+        }
+        .partner-item:hover i { color: var(--primary); }
+
+        /* ========== CTA ========== */
+        .cta {
+            padding: 100px 40px;
+            background: linear-gradient(135deg, rgba(163,230,53,0.1) 0%, rgba(10,10,10,1) 100%);
+            position: relative; overflow: hidden;
+        }
+        .cta::before {
+            content: ''; position: absolute;
+            top: -50%; right: -20%; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(163,230,53,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .cta-content {
+            max-width: 800px; margin: 0 auto;
+            text-align: center; position: relative; z-index: 1;
+        }
+        .cta h2 {
+            font-size: clamp(32px, 5vw, 52px); margin-bottom: 20px;
+        }
+        .cta p {
+            color: var(--text-muted); font-size: 18px;
+            line-height: 1.7; margin-bottom: 40px;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--darker); padding: 80px 40px 30px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px; max-width: 1300px; margin: 0 auto 60px;
+        }
+        .footer-brand .logo { margin-bottom: 25px; }
+        .footer-brand p {
+            color: var(--text-muted); line-height: 1.8;
+            font-size: 14px; margin-bottom: 25px;
+        }
+        .footer-social {
+            display: flex; gap: 12px;
+        }
+        .footer-social a {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: var(--card); border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text); text-decoration: none;
+            transition: all 0.3s; font-size: 14px;
+        }
+        .footer-social a:hover {
+            background: var(--primary); border-color: var(--primary);
+            color: var(--dark);
+        }
+        .footer-col h4 {
+            font-size: 18px; margin-bottom: 25px; color: var(--text);
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a {
+            color: var(--text-muted); text-decoration: none;
+            font-size: 14px; transition: all 0.3s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .footer-col ul li a:hover {
+            color: var(--primary); padding-left: 5px;
+        }
+        .footer-col ul li a i { font-size: 10px; color: var(--primary); }
+        .footer-bottom {
+            max-width: 1300px; margin: 0 auto;
+            padding-top: 30px; border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 20px;
+        }
+        .footer-bottom p { color: var(--text-muted); font-size: 13px; }
+        .footer-logo-center {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .footer-logo-center img {
+            width: 40px; height: 40px; border-radius: 6px;
+            object-fit: cover; border: 1px solid var(--primary);
+        }
+        .footer-logo-center span {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px; font-weight: 700; letter-spacing: 1px;
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .fade-in {
+            opacity: 0; transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-left {
+            opacity: 0; transform: translateX(-60px);
+            transition: all 0.8s ease;
+        }
+        .fade-in-left.visible { opacity: 1; transform: translateX(0); }
+        .fade-in-right {
+            opacity: 0; transform: translateX(60px);
+            transition: all 0.8s ease;
+        }
+        .fade-in-right.visible { opacity: 1; transform: translateX(0); }
+        .scale-in {
+            opacity: 0; transform: scale(0.8);
+            transition: all 0.8s ease;
+        }
+        .scale-in.visible { opacity: 1; transform: scale(1); }
+        .rotate-in {
+            opacity: 0; transform: rotate(-10deg) scale(0.9);
+            transition: all 0.8s ease;
+        }
+        .rotate-in.visible { opacity: 1; transform: rotate(0) scale(1); }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .about-story-grid { grid-template-columns: 1fr; gap: 50px; }
+            .mission-vision-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+            .gallery-item:nth-child(4) { grid-column: span 1; }
+            .partners-grid { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .timeline-container::before { left: 20px; transform: none; }
+            .timeline-item, .timeline-item:nth-child(even) {
+                justify-content: flex-start; padding: 0 0 0 50px;
+            }
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-item:nth-child(odd) .timeline-content {
+                margin: 0; max-width: 100%;
+            }
+            .timeline-dot { left: 20px; transform: none; }
+            .timeline-item:hover .timeline-dot { transform: scale(1.2); }
+            .experience-badge { right: 10px; bottom: 10px; }
+        }
+        @media (max-width: 768px) {
+            .header { padding: 15px 20px; }
+            .nav {
+                position: fixed; top: 0; right: -100%;
+                width: 80%; max-width: 350px; height: 100vh;
+                background: var(--darker); flex-direction: column;
+                justify-content: center; gap: 30px;
+                transition: right 0.4s ease;
+                border-left: 1px solid var(--border); padding: 40px;
+            }
+            .nav{
+    display:flex;
+    align-items:center;
+    gap:35px;
+    margin-left:auto;
+}
+            .nav.active { right: 0; }
+            .hamburger { display: flex; }
+            .page-hero { padding: 100px 20px 60px; }
+            .about-story { padding: 60px 20px; }
+            .about-story-features { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+            .partners-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            section { padding: 60px 20px !important; }
+            @media (max-width:768px){
+    .hamburger{
+        display:flex;
+    }
+}
+        }
+
+
+.header{
+    background:rgba(10,10,10,.95);
+    backdrop-filter:blur(12px);
+}
+
+.logo-img{
+    width:42px;
+    height:42px;
+}
+
+.logo-text{
+    font-size:22px;
+}
+
+.page-hero{
+    padding-top:90px !important;
+    margin-top:70px;
+}
+
+.page-hero{
+    margin-top:70px;
+}
+
+
+
+        
+    </style>
+<!-- <base target="_blank"> -->
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+       <a href="index.html" class="logo">
+            <img src="logoo.webp" alt="Padeltaz Logo" class="logo-img">
+            <span class="logo-text">Stac<span>kly</span></span>
+        </a>
+     <nav class="nav" id="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="courts.html">Courts</a>
+            <a href="couch.html">Coaches</a>
+            <!-- <a href="404.html">Pricing</a> -->
+            <a href="contact.html">Contact</a>
+            <a href="login.html" class="btn">Login</a>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </header>
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-bg">
+            <img src="14.webp" alt="About">
+        </div>
+        <div class="page-hero-content fade-in">
+            <span class="tag">Who We Are</span>
+            <h1>About <span>Padeltaz</span></h1>
+            <p>Discover the story behind the region's premier padel destination and the passion that drives us.</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>About Us</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Story -->
+    <section class="about-story">
+        <div class="about-story-grid">
+            <div class="about-story-img fade-in-left">
+                <img src="3.webp" alt="Our Story">
+                <div class="experience-badge">
+                    <h3>7+</h3>
+                    <p>Years of Excellence</p>
+                </div>
+            </div>
+            <div class="about-story-content fade-in-right">
+                <h2>Our <span>Story</span> & Heritage</h2>
+                <!-- <p>Founded in 2019 by a group of passionate padel enthusiasts, Padeltaz began as a single outdoor court with a dream to bring world-class padel to our community. What started as a modest facility has grown into one of the region's most respected padel clubs.</p> -->
+                <!-- <p>Our name "Padeltaz" combines "Padel" with the energy and dynamism of the sport. We believe padel is more than a game — it's a lifestyle that brings people together, builds fitness, and creates lasting friendships.</p> -->
+                <!-- <p>Today, we operate 12 professional courts, employ 15+ certified coaches, and serve over 2,500 active members. But our mission remains the same: to make padel accessible, enjoyable, and competitive for everyone.</p> -->
+                <div class="about-story-features">
+                    <div class="story-feature">
+                        <i class="fas fa-bullseye"></i>
+                        <div>
+                            <h4>Our Mission</h4>
+                            <p>To make padel accessible and enjoyable for everyone, from beginners to professionals.</p>
+                        </div>
+                    </div>
+                    <div class="story-feature">
+                        <i class="fas fa-eye"></i>
+                        <div>
+                            <h4>Our Vision</h4>
+                            <p>To be the leading padel community hub, fostering talent and promoting the sport.</p>
+                        </div>
+                    </div>
+                    <div class="story-feature">
+                        <i class="fas fa-heart"></i>
+                        <div>
+                            <h4>Our Values</h4>
+                            <p>Excellence, inclusivity, community, and continuous improvement in everything we do.</p>
+                        </div>
+                    </div>
+                    <div class="story-feature">
+                        <i class="fas fa-handshake"></i>
+                        <div>
+                            <h4>Our Promise</h4>
+                            <p>World-class facilities, expert coaching, and an unmatched community experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Vision -->
+    <section class="mission-vision">
+        <div class="mission-vision-grid">
+            <div class="mv-card fade-in-left">
+                <div class="mv-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Our Mission</h3>
+                <p>To democratize padel by providing world-class facilities and coaching that make the sport accessible to everyone. We believe in nurturing talent from the grassroots level while creating a vibrant community that celebrates the spirit of competition and camaraderie.</p>
+            </div>
+            <div class="mv-card fade-in-right">
+                <div class="mv-icon"><i class="fas fa-globe"></i></div>
+                <h3>Our Vision</h3>
+                <p>To become the most recognized padel destination in the region, known for producing champions and fostering a community that lives and breathes the sport. We envision a future where padel is the number one recreational activity for families and athletes alike.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Counter -->
+    <section class="stats-counter">
+        <div class="stats-grid">
+            <div class="stat-box fade-in scale-in">
+                <i class="fas fa-users"></i>
+                <h3 class="counter" data-target="2500">0</h3>
+                <p>Active Members</p>
+            </div>
+            <div class="stat-box fade-in scale-in">
+                <i class="fas fa-table-tennis-paddle-ball"></i>
+                <h3 class="counter" data-target="12">0</h3>
+                <p>Professional Courts</p>
+            </div>
+            <div class="stat-box fade-in scale-in">
+                <i class="fas fa-chalkboard-user"></i>
+                <h3 class="counter" data-target="15">0</h3>
+                <p>Expert Coaches</p>
+            </div>
+            <div class="stat-box fade-in scale-in">
+                <i class="fas fa-trophy"></i>
+                <h3 class="counter" data-target="48">0</h3>
+                <p>Tournaments Hosted</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline">
+        <div class="section-header fade-in">
+            <span class="tag">Our Journey</span>
+            <h2>The <span style="color: var(--primary);">Timeline</span></h2>
+            <p>From a single court to a premier sports academy — our journey of growth.</p>
+        </div>
+        <div class="timeline-container">
+            <div class="timeline-item fade-in-left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2019</div>
+                    <h3>The Beginning</h3>
+                    <p>Padeltaz opened its doors with 2 outdoor courts and a small team of 3 coaches. The vision was simple: make padel accessible to everyone.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in-right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2020</div>
+                    <h3>First Expansion</h3>
+                    <p>Added 4 indoor courts with climate control and premium lighting. Membership grew to 500 active players.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in-left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2021</div>
+                    <h3>Academy Launch</h3>
+                    <p>Launched the Padeltaz Academy with structured coaching programs for juniors and adults. Hosted our first regional tournament.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in-right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2022</div>
+                    <h3>Pro Shop & Cafe</h3>
+                    <p>Opened our pro shop with premium equipment and a cafe lounge. Membership surpassed 1,500 players.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in-left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2023</div>
+                    <h3>Fitness Center</h3>
+                    <p>Added a dedicated fitness center with padel-specific training equipment. Expanded to 12 total courts.</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in-right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="year">2024</div>
+                    <h3>2,500+ Members</h3>
+                    <p>Reached 2,500 active members and hosted 48 tournaments. Became the region's leading padel destination.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <!-- <section class="gallery">
+        <div class="section-header fade-in">
+            <span class="tag">Gallery</span>
+            <h2>Our <span style="color: var(--primary);">Facilities</span></h2>
+            <p>Take a visual tour of our world-class padel facilities.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in">
+                <img src="3.webp" alt="Court">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="2.webp" alt="Court">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="4.webp" alt="Court">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="5.webp" alt="Training">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="6.webp" alt="Training">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="7.webp" alt="Training">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Partners -->
+    <section class="partners">
+        <div class="section-header fade-in">
+            <span class="tag">Partners</span>
+            <h2>Trusted <span style="color: var(--primary);">Brands</span></h2>
+            <p>We partner with the world's leading sports brands.</p>
+        </div>
+        <div class="partners-grid">
+            <div class="partner-item fade-in"><i class="fas fa-football-ball"></i></div>
+            <div class="partner-item fade-in"><i class="fab fa-table-tennis-paddle-ball"></i></div>
+            <div class="partner-item fade-in"><i class="fas fa-circle-notch"></i></div>
+            <div class="partner-item fade-in"><i class="fas fa-basketball-ball"></i></div>
+            <div class="partner-item fade-in"><i class="fas fa-running"></i></div>
+            <div class="partner-item fade-in"><i class="fas fa-dumbbell"></i></div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-content fade-in">
+            <h2>Join the <span style="color: var(--primary);">Padeltaz</span> Family</h2>
+            <p>Be part of a community that shares your passion for padel. Whether you're a beginner or a seasoned player, there's a place for you here.</p>
+            <a href="404.html" class="btn btn-white" style="font-size: 16px; padding: 16px 40px;"><i class="fas fa-user-plus"></i> Become a Member</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                  <a href="index.html" class="logo">
+                    <img src="logoo.webp" alt="Padeltaz Logo" class="logo-img">
+                    <span class="logo-text">Stac<span>kly</span></span>
+                </a>
+                <p>Premier padel club and sports academy. World-class facilities, expert coaching, and a vibrant community for players of all levels.</p>
+                <div class="footer-social">
+                    <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+                    <a href="404.html"><i class="fab fa-instagram"></i></a>
+                    <a href="404.html">    <i class="fa-brands fa-x-twitter"></i>
+</a>
+                    <a href="404.html"><i class="fab fa-youtube"></i></a>
+                    <a href="404.html"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                  <ul>
+                                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="courts.html"><i class="fas fa-chevron-right"></i> Our Courts</a></li>
+                    <li><a href="couch.html"><i class="fas fa-chevron-right"></i> Coaching</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="404.html"><i class="fas fa-chevron-right"></i> Court Booking</a></li>
+                    <li><a href="404.html"><i class="fas fa-chevron-right"></i> Private Coaching</a></li>
+                    <li><a href="404.html"><i class="fas fa-chevron-right"></i> Group Classes</a></li>
+                    <li><a href="404.html"><i class="fas fa-chevron-right"></i> Tournaments</a></li>
+                                        <li><a href="404.html"><i class="fas fa-chevron-right"></i> Pro Shop</a></li>
+
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="404.html"><i class="fas fa-map-marker-alt"></i> Chinna Tirupathi Salem</a></li>
+                    <li><a href="404.html"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
+                    <li><a href="404.html"><i class="fas fa-envelope"></i> info@stack.com</a></li>
+                    <li><a href="404.html"><i class="fas fa-clock"></i> Mon-Sun: 6AM - 11PM</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Padeltaz. All rights reserved.</p>
+            <!-- <div class="footer-logo-center">
+                <img src="logo.webp" alt="Logo">
+                <span>Stac<span style="color: var(--primary);">ly</span></span>
+            </div> -->
+            <p>Designed with passion for the game.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        const menuOverlay = document.getElementById('menuOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        });
+        menuOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in, .rotate-in').forEach(el => observer.observe(el));
+
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current).toLocaleString();
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target.toLocaleString() + '+';
+                        }
+                    };
+                    updateCounter();
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(counter => counterObserver.observe(counter));
+    </script>
+</body>
+</html>
